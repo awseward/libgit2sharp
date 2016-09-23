@@ -745,7 +745,8 @@ namespace LibGit2Sharp
 
                     using (RepositoryHandle repo = Proxy.git_clone(sourceUrl, workdirPath, ref cloneOpts))
                     {
-                        clonedRepoPath = Proxy.git_repository_path(repo).Native;
+                        clonedRepoPath = Path.Combine(workdirPath, ".git");
+                        //clonedRepoPath = Proxy.git_repository_path(repo).Native;
                     }
                 }
                 finally
