@@ -743,8 +743,9 @@ namespace LibGit2Sharp
                 {
                     cloneOpts.CheckoutBranch = StrictUtf8Marshaler.FromManaged(options.BranchName);
 
-                    using (RepositoryHandle repo = Proxy.git_clone(sourceUrl, workdirPath, ref cloneOpts))
+                    using (RepositoryHandle repo = /* FIXME: This is definitely the call leaving a filehandle around */ Proxy.git_clone(sourceUrl, workdirPath, ref cloneOpts))
                     {
+                        // FIXME: Put this back
                         clonedRepoPath = Path.Combine(workdirPath, ".git");
                         //clonedRepoPath = Proxy.git_repository_path(repo).Native;
                     }
